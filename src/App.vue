@@ -1,23 +1,30 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
+    <div id="app">
+        <app-header v-if="header_show" :head-titles="headerTitle">
+        </app-header>
+        <router-view/>
+        <app-footer></app-footer>
+    </div>
 </template>
 
 <script>
+import AppHeader from "./components/header";
+import AppFooter from "./components/footer";
+
 export default {
-  name: 'App'
+    name: 'App',
+    components: {AppFooter, AppHeader},
+    data() {
+        return {
+            header_show: true,
+            headerTitle: ""
+        }
+    },
+    methods: {
+        header: function (bool, title) {
+            this.header_show = bool;
+            this.headerTitle = title;
+        }
+    }
 }
 </script>
-
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
